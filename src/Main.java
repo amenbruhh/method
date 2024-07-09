@@ -4,7 +4,7 @@ public class Main {
 
     // задача 1
     public static void checkYear(int year) {
-        if (year % 4 == 0) {
+        if (year % 4 == 0 || year % 100 == 0 || year % 400 == 0) {
             System.out.println(year + " год - является високосным.");
         } else {
             System.out.println(year + " год - не является високосным.");
@@ -12,18 +12,20 @@ public class Main {
     }
 
     // задача 2
-    public static void printAppVersion(int clientOS) {
+    public static void printAppVersion(int currentYear,int clientOS) {
 
-        int currentYear = LocalDate.now().getYear();
-
-        if (clientOS == 0 && currentYear <= 2015) {
-            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-        } else if (clientOS != 0) {
-            System.out.println("Установите облегченную версию приложения для Android по ссылке");
-        } else if (currentYear >= 2015) {
-            System.out.println("Установите версию приложения для iOS по ссылке");
+        if (currentYear <= 2015) {
+            if (clientOS == 0) {
+                System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+            } else if (clientOS == 1) {
+                System.out.println("Установите облегченную версию приложения для Android по ссылке");
+            }
         } else {
-            System.out.println("Установите версию приложения для Android по ссылке");
+            if (clientOS == 0) {
+                System.out.println("Установите версию приложения для iOS");
+            } else if (clientOS == 1) {
+                System.out.println("Установите версию приложения для Android");
+            }
         }
     }
 
@@ -48,12 +50,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int year = 2023;
+        int year = 1900;
         checkYear(year);
         System.out.println();
 
         int clientOS = 0;
-        printAppVersion(clientOS);
+        int currentYear = 2024;
+        printAppVersion(currentYear, clientOS);
         System.out.println();
 
         int deliveryDistance = 1000;
